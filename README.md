@@ -1,68 +1,105 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# CAMPUS GAMING NETWORK
 
-## Available Scripts
+Connect with other collegiate gamers for casual or competitive gaming at your school or nearby.
 
-In the project directory, you can run:
+## Getting Started
 
-### `npm start`
+These instructions will get you a copy of the project up and running on your local machine for development and testing pirposes.
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Prerequisites
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+The project uses nodejs which can be downloaded here:
 
-### `npm test`
+- [nodejs](https://nodejs.org/en/download/)
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Clone
 
-### `npm run build`
+- Clone this repo to you local machine using:
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  https://github.com/bsansone/campus-gaming-network.git
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+## Setup
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Once you have the project on your local machine, open up a terminal in the project folder and run,
 
-### `npm run eject`
+```shell
+$ npm install
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+to download and install the dependencies.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Firebase
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+A Firebase project must be created to fully test and run the app. You can sign up using your google account here:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+https://firebase.google.com/
 
-## Learn More
+Create a project and call it `campus-gaming-network-test` or something along those lines. You will need to initialize a new database as well as enable the `Email/Password` authentication method. You can view the Firebase documentation here:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+https://firebase.google.com/docs
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+To register the app to your firebase account you must:
 
-### Code Splitting
+1. Copy the contents of `.env.sample` into a new file called `.env.local`
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+2. Populate the firebase section of that `.env.local` file with your unique Firebase SDK snippet found under your firebase project settings.
 
-### Analyzing the Bundle Size
+```javascript
+const firebaseConfig = {
+  apiKey: 'some-text',
+  authDomain: 'some-text',
+  databaseURL: 'some-url',
+  projectId: 'some-text',
+  storageBucket: 'some-text',
+  messagingSenderId: 'some-text',
+  appId: 'some-text',
+};
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+```
+REACT_APP_FIREBASE_API_KEY=xxxxXXXX
+REACT_APP_FIREBASE_AUTH_DOMAIN=xxxxXXXX.firebaseapp.com
+REACT_APP_FIREBASE_DATABASE_URL=https://xxxXXXX.firebaseio.com
+REACT_APP_FIREBASE_PROJECT_ID=xxxxXXXX
+REACT_APP_FIREBASE_STORAGE_BUCKET=xxxxXXXX.appspot.com
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID=xxxxXXXX
+REACT_APP_FIREBASE_APP_ID=xxxxXXXX:xxxxXXXX:xxxxXXXX:xxxxXXXX
+```
 
-### Making a Progressive Web App
+3. To upload the cloud functions into you firebase project run,
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+```shell
+$ firebase deploy
+```
 
-### Advanced Configuration
+4. To upload the schools info into the db, navigate to the `uploadSchools` folder in the app directory and run,
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+```shell
+$ npm install
+```
 
-### Deployment
+- this will create a `node_modules` folder and install the dependencies needed.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+- once you have the dependencies you can run the script to upload the schools by typing into the terminal,
 
-### `npm run build` fails to minify
+```shell
+$ node .
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- you should now see a `schools` collection was created and populated with several school documents in your firebase project.
+
+### Google Maps API
+
+To get the Google Maps API Key, follow the steps indicated here
+
+[Google Maps Platform](https://developers.google.com/maps/documentation/javascript/get-api-key)
+
+Copy the api key into the `.env.local` file that was created earlier
+
+## Running
+
+To run the app and test functionality use,
+
+```shell
+$ npm start
+```
